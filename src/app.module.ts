@@ -5,11 +5,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { join } from 'path';
-import { CollectionsModule } from './collections/collections.module';
-import { CollectionItemModule } from './collection-item/collection-item.module';
+import { CollectionModule } from './collection/collection.module';
+import { CollectionItemModule } from './collectionItem/collectionItem.module';
 @Module({
   imports: [
-    CollectionsModule,
     MongooseModule.forRoot(
       'mongodb+srv://chronosEntity98:JglXmAoVgZdDviGj@cluster0.arkkp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
     ),
@@ -18,7 +17,7 @@ import { CollectionItemModule } from './collection-item/collection-item.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
     }),
-    CollectionsModule,
+    CollectionModule,
     CollectionItemModule,
   ],
   controllers: [AppController],

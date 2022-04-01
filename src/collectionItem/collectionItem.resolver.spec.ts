@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CollectionItemResolver } from './collection-item.resolver';
+import { CollectionItemResolver } from './collectionItem.resolver';
 
 describe('CollectionItemResolver', () => {
   let resolver: CollectionItemResolver;
