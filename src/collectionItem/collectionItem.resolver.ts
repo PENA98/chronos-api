@@ -4,6 +4,8 @@ import {
   createCollectionItemInput,
 } from './collectionItem.schema';
 import { CollectionItemService } from './collectionItem.service';
+
+//comment the code
 @Resolver()
 export class CollectionItemResolver {
   constructor(private collectionItemService: CollectionItemService) {}
