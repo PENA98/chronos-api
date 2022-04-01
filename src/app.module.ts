@@ -10,7 +10,7 @@ import { CollectionItemModule } from './collectionItem/collectionItem.module';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://chronosEntity98:JglXmAoVgZdDviGj@cluster0.arkkp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+      'mongodb+srv://chronosEntity98:JglXmAoVgZdDviGj@cluster0.arkkp.mongodb.net/chronosDB?retryWrites=true&w=majority',
     ),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

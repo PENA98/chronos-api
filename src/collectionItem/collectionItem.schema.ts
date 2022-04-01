@@ -3,6 +3,7 @@ import { ObjectType, Field, ID, InputType, Int } from '@nestjs/graphql';
 import mongoose from 'mongoose';
 import { Collection } from '../collection/collection.schema';
 
+export type CollectionItemDocument = mongoose.Document & CollectionItem;
 @Schema()
 @ObjectType()
 export class CollectionItem {
@@ -42,10 +43,14 @@ export class CollectionItem {
   updatedAt: Date;
 }
 
-export const CollectionItemSchema = SchemaFactory.createForClass(CollectionItem);
+export const CollectionItemSchema =
+  SchemaFactory.createForClass(CollectionItem);
 
 @InputType()
 export class createCollectionItemInput {
+  @Field()
+  _id: string;
+
   @Field()
   name: string;
 

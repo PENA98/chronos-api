@@ -1,14 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CollectionItem, createCollectionItemInput } from './collectionItem.schema';
+import {
+  CollectionItem,
+  CollectionItemDocument,
+  createCollectionItemInput,
+} from './collectionItem.schema';
+import * as data from '../data/collectionItems';
 
 @Injectable()
 export class CollectionItemService {
-
-  collectionItems: Partial<CollectionItem>
+  collectionItems: Partial<CollectionItem>;
   constructor(
-    @InjectModel(CollectionItem.name) private collectionItemModel: Model<CollectionItem>,
+    @InjectModel(CollectionItem.name)
+    private collectionItemModel: Model<CollectionItemDocument>,
   ) {
     // this.collectionItems = collectionItems
   }
@@ -17,9 +22,23 @@ export class CollectionItemService {
     return this.collectionItemModel.find().lean();
   }
 
-  async findById(id: string) {}
+  async findById(id: string) {
+    return this.collectionItemModel.findById(id).lean();
+  }
 
-  async createCollectionItem(collectionItem: createCollectionItemInput) {}
+  async createCollectionItem(collectionItem: createCollectionItemInput) {
+    const createdCollectionItem = new this.collectionItemModel(collectionItem);
+    return createdCollectionItem.save();
+  }
 
-  async updateCollectionItem(collectionItem: createCollectionItemInput) {}
+  async updateCollectionItem(collectionItem: createCollectionItemInput) {
+    return this.collectionItemModel.updateOne(
+      { _id: collectionItem._id },
+      collectionItem,
+    );
+  }
+
+  async deleteCollectionItem(id: string) {
+    return this.collectionItemModel.deleteOne({ _id: id });
+  }
 }

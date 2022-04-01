@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectType, Field, ID, InputType, Int } from '@nestjs/graphql';
+import mongoose from 'mongoose';
 
+export type CollectionDocument = mongoose.Document & Collection;
 @Schema()
 @ObjectType()
 export class Collection {
@@ -31,7 +33,7 @@ export class Collection {
 export const CollectionSchema = SchemaFactory.createForClass(Collection);
 
 @InputType()
-export class createCollectionItemInput {
+export class createCollectionInput {
   @Field()
   _id: string;
 
