@@ -8,7 +8,7 @@ import { CollectionItemService } from './collectionItem.service';
 //comment the code
 @Resolver()
 export class CollectionItemResolver {
-  constructor(private collectionItemService: CollectionItemService) {}
+  constructor(private collectionItemService: CollectionItemService) {} // <-- inject the service
 
   @Query(() => [CollectionItem]) // <-- what the query will return
   async collectionItems() {
@@ -21,9 +21,9 @@ export class CollectionItemResolver {
     return this.collectionItemService.findById(id);
   }
 
-  @Mutation(() => CollectionItem)
-  async createCollectionItem(collectionItem: createCollectionItemInput) {
-    return this.collectionItemService.createCollectionItem(collectionItem);
+  @Mutation(() => CollectionItem) // <-- what the mutation will receive
+  async createCollectionItem(collectionItem: createCollectionItemInput) { // <-- mutation name
+    return this.collectionItemService.createCollectionItem(collectionItem); // <-- resolve the mutation
   }
 
   @Mutation(() => CollectionItem)
