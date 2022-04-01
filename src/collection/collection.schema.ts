@@ -30,7 +30,6 @@ export class Collection {
 
 export const CollectionSchema = SchemaFactory.createForClass(Collection);
 
-
 @InputType()
 export class createCollectionItemInput {
   @Field()
@@ -51,3 +50,4 @@ export class createCollectionItemInput {
   @Field()
   updatedAt: Date;
 }
+

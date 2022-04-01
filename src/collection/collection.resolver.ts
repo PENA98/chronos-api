@@ -1,4 +1,13 @@
-import { Resolver } from '@nestjs/graphql';
+import { Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
-export class CollectionResolver {}
+export class CollectionResolver {
+
+    constructor() {}
+
+    @Query(() => String)
+    async hello() {
+        return 'Hello World!';
+    }
+
+}
