@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MongooseModule } from '@nestjs/mongoose';
+
 import { AppService } from './app.service';
 import { join } from 'path';
 import { CollectionModule } from './collection/collection.module';
@@ -12,6 +13,7 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     MongooseModule.forRoot(
       'mongodb+srv://chronosEntity98:JglXmAoVgZdDviGj@cluster0.arkkp.mongodb.net/chronosDB?retryWrites=true&w=majority',
+
     ),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -23,6 +25,7 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     AuthModule,
   ],
+
   providers: [AppService],
 })
 export class AppModule {}

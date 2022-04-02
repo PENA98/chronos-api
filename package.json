@@ -31,6 +31,7 @@
     "apollo-server-express": "^3.6.7",
     "graphql": "^16.3.0",
     "mongoose": "^6.2.9",
+
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
