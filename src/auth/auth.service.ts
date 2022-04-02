@@ -15,13 +15,12 @@ export class AuthService {
     return null;
   }
 
-  async login(loginUserInput: LoginUserInput): Promise<any> {
+  async login(loginUserInput: LoginUserInput) {
     const user = await this.userService.findOne(loginUserInput.username);
     const { password, ...result } = user;
     return {
-      access_token: 'fake-token',
+      accessToken: 'fake-token',
       user: result,
     };
-    return null;
   }
 }

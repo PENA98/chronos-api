@@ -23,8 +23,8 @@ export class UserService {
     return this.userModel.find().lean();
   }
 
-  findOne(id: string) {
-    return this.userModel.findById(id).lean();
+  findOne(username: string) {
+    return this.userModel.findOne({ username }).lean();
   }
 
   update(id: string, updateUserInput: UpdateUserInput) {
