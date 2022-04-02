@@ -6,7 +6,6 @@ import {
   CollectionItemDocument,
   createCollectionItemInput,
 } from './collectionItem.schema';
-import * as data from '../data/collectionItems';
 
 @Injectable()
 export class CollectionItemService {
