@@ -11,8 +11,7 @@ export class CollectionItemResolver {
   constructor(private collectionItemService: CollectionItemService) {} // <-- inject the service
 
   @Query(() => [CollectionItem]) // <-- what the query will return
-  async collectionItems() {
-    // <-- query name
+  async collectionItems() {    // <-- query name
     return this.collectionItemService.findAll(); // <-- resolve the query
   }
 

@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { join } from 'path';
 import { CollectionModule } from './collection/collection.module';
 import { CollectionItemModule } from './collectionItem/collectionItem.module';
+import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     MongooseModule.forRoot(
@@ -19,6 +20,7 @@ import { CollectionItemModule } from './collectionItem/collectionItem.module';
     }),
     CollectionModule,
     CollectionItemModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

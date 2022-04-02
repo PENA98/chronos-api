@@ -7,13 +7,14 @@ type Collection {
   createdAt: DateTime!
   description: String!
   image: String!
+  items: [CollectionItem!]!
   name: String!
   updatedAt: DateTime!
 }
 
 type CollectionItem {
+  CollectionID: String!
   _id: ID!
-  collectionId: String!
   condition: String!
   createdAt: DateTime!
   description: String!

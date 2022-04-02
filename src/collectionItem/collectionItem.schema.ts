@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import { Collection } from '../collection/collection.schema';
 
 export type CollectionItemDocument = mongoose.Document & CollectionItem;
-@Schema()
+@Schema( )
 @ObjectType()
 export class CollectionItem {
   @Field(() => ID)
@@ -30,9 +30,9 @@ export class CollectionItem {
   @Field()
   condition: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Collection.name })
+  @Prop( { required: true })
   @Field()
-  collectionId: string;
+  CollectionID: string;
 
   @Prop()
   @Field()
@@ -65,9 +65,6 @@ export class createCollectionItemInput {
 
   @Field()
   condition: string;
-
-  @Field()
-  collectionId: string;
 
   @Field()
   createdAt: Date;
