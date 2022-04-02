@@ -3,6 +3,7 @@ import { ObjectType, Field, ID, InputType, Int } from '@nestjs/graphql';
 import mongoose from 'mongoose';
 
 export type CollectionDocument = mongoose.Document & Collection;
+
 @Schema()
 @ObjectType()
 export class Collection {
