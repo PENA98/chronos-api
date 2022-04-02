@@ -9,6 +9,7 @@ type Collection {
   image: String!
   name: String!
   updatedAt: DateTime!
+  userID: String!
 }
 
 type CollectionItem {
@@ -54,7 +55,7 @@ type Mutation {
   deleteCollectionItem: CollectionItem!
   login(LoginUserInput: LoginUserInput!): LoginResponse!
   removeUser(_id: String!): User!
-  signup(loginUserInput: SignupUserInput!): User!
+  signup(signupUserInput: SignupUserInput!): User!
   updateCollection: Collection!
   updateCollectionItem: CollectionItem!
   updateUser(updateUserInput: UpdateUserInput!): User!
