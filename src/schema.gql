@@ -54,6 +54,7 @@ type Mutation {
   deleteCollectionItem: CollectionItem!
   login(LoginUserInput: LoginUserInput!): LoginResponse!
   removeUser(_id: String!): User!
+  signup(loginUserInput: SignupUserInput!): User!
   updateCollection: Collection!
   updateCollectionItem: CollectionItem!
   updateUser(updateUserInput: UpdateUserInput!): User!
@@ -66,6 +67,15 @@ type Query {
   collections: [Collection!]!
   user(_id: String!): User!
   users: [User!]!
+}
+
+input SignupUserInput {
+  confirmPassword: String!
+  email: String!
+  lastname: String!
+  name: String!
+  password: String!
+  username: String!
 }
 
 input UpdateUserInput {
