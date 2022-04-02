@@ -83,5 +83,4 @@ type User {
   lastname: String!
   name: String!
   username: String!
-
 }
