@@ -4,6 +4,7 @@ import { User } from '../users/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { SignupUserInput } from './dto/signupUser.input';
 import * as bcrypt from 'bcrypt';
+import { json } from 'express';
 @Injectable()
 export class AuthService {
   constructor(
@@ -13,19 +14,30 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.userService.findOne(username);
-    const valid = await bcrypt.compare(pass, user?.password);
-    if (user && valid) { // <-- check if password matches
-      const { password, ...result } = user; // <-- remove password from user object
-      return result;
+    console.log(username);
+
+    if (user) {
+      // <-- check if password matches
+      const valid = await bcrypt.compare(pass, user?.password);
+      if (valid) {
+        const { password, ...result } = user; // <-- remove password from user object
+        return result;
+      }
+      throw new Error(
+        JSON.stringify({ message: 'Invalid username or password', code: 401 }),
+      );
     }
-    return null;
+    throw new Error(
+      JSON.stringify({ message: 'Invalid username or password', code: 401 }),
+    );
   }
 
   async login(user: User) {
     console.log(user);
     // const { password, ...result } = user;
     return {
-      accessToken: this.jwtService.sign({ // <-- create JWT
+      accessToken: this.jwtService.sign({
+        // <-- create JWT
         username: user.username,
         sub: user._id,
       }),
