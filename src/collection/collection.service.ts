@@ -33,7 +33,6 @@ export class CollectionService {
   }
 
   async createCollection(collection: createCollectionInput) {
-    
     const createdCollection = new this.collectionModel(collection);
     return createdCollection.save();
   }
@@ -43,6 +42,6 @@ export class CollectionService {
   }
 
   async deleteCollection(id: string) {
-    return this.collectionModel.deleteOne({ _id: id });
+    return this.collectionModel.deleteOne({ _id: id }).then(() => {_id: id});
   }
 }

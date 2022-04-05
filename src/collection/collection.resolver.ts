@@ -1,31 +1,37 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Collection, createCollectionInput } from './collection.schema';
+import { Collection, createCollectionInput, updateCollectionInput } from './collection.schema';
 import { CollectionService } from './collection.service';
 import { createWriteStream } from 'fs';
 import path from 'path';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt.auth.guard';
 
 @Resolver()
 export class CollectionResolver {
   constructor(private collectionService: CollectionService) {} // <-- inject the service
 
   @Query(() => [Collection]) // <-- what the query will return
+  @UseGuards(JwtAuthGuard) // <-- protects the query
   async collections() {
     // <-- query name
     return this.collectionService.findAll(); // <-- resolve the query
   }
 
   @Query(() => [Collection]) // <-- what the query will return
+  @UseGuards(JwtAuthGuard) // <-- protects the query
   async getUserCollections(@Args('userID') userID: string) {
     // <-- query name
     return this.collectionService.findUserCollections(userID); // <-- resolve the query
   }
 
   @Query(() => Collection)
+  @UseGuards(JwtAuthGuard) // <-- protects the query
   async collection(id: string) {
     return this.collectionService.findById(id);
   }
 
   @Mutation(() => Collection) // <-- what the mutation will receive
+  @UseGuards(JwtAuthGuard) // <-- protects the query
   async createCollection(
     @Args('createCollectionInput') createCollectionInput: createCollectionInput,
   ) {
@@ -34,6 +40,7 @@ export class CollectionResolver {
   }
 
   @Mutation(() => String)
+  @UseGuards(JwtAuthGuard) // <-- protects the query
   async uploadFile(parent, { file }) {
     const { createReadStream, filename, mimetype, encoding } = await file;
     const stream = createReadStream();
@@ -43,12 +50,16 @@ export class CollectionResolver {
   }
 
   @Mutation(() => Collection)
-  async updateCollection(collection: Collection) {
-    return this.collectionService.updateCollection(collection);
+  @UseGuards(JwtAuthGuard) // <-- protects the query
+  async updateCollection( @Args('updateCollectionInput') updateCollectionInput: updateCollectionInput,) {
+    return this.collectionService.updateCollection(updateCollectionInput);
   }
 
+  //mutation that returns id of deleted collection
+
   @Mutation(() => Collection)
-  async deleteCollection(id: string) {
-    return this.collectionService.deleteCollection(id);
+  @UseGuards(JwtAuthGuard) // <-- protects the query
+  async deleteCollection(@Args('_id') _id: string) {
+    return this.collectionService.deleteCollection(_id);
   }
 }
