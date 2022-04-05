@@ -12,6 +12,10 @@ export class Collection {
 
   @Prop({ required: true })
   @Field()
+  userID: string;
+
+  @Prop({ required: true })
+  @Field()
   name: string;
 
   @Prop({ required: true })
@@ -36,7 +40,31 @@ export const CollectionSchema = SchemaFactory.createForClass(Collection);
 @InputType()
 export class createCollectionInput {
   @Field()
+  userID: string;
+
+  @Field()
+  name: string;
+
+  @Field()
+  description: string;
+
+  @Field()
+  image: string;
+
+  @Field()
+  createdAt: Date;
+
+  @Field()
+  updatedAt: Date;
+}
+
+@InputType()
+export class updateCollectionInput {
+  @Field()
   _id: string;
+  
+  @Field()
+  userID: string;
 
   @Field()
   name: string;
