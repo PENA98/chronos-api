@@ -6,11 +6,14 @@ import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from 'src/users/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [PassportModule, UsersModule, JwtModule.register({
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    PassportModule, UsersModule, JwtModule.register({
     signOptions: { expiresIn: '4h' },
-    secret: 'hide-me',
+    secret: process.env.JWT_SECRET,
   })],
   providers: [AuthService, AuthResolver, LocalStrategy, JwtStrategy]
 })

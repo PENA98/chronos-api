@@ -17,6 +17,9 @@ lerna-debug.log*
 #static content
 /public
 
+#env variables
+.env
+
 # Tests
 /coverage
 /.nyc_output
