@@ -4,10 +4,12 @@ import { CollectionService } from './collection.service';
 describe('CollectionService', () => {
   let service: CollectionService;
 
+  const mock = {}
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [CollectionService],
-    }).compile();
+    }).overrideProvider(CollectionService).useValue(mock).compile();
 
     service = module.get<CollectionService>(CollectionService);
   });
