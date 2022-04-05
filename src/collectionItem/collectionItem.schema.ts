@@ -24,7 +24,7 @@ export class CollectionItem {
 
   @Prop({ required: true })
   @Field()
-  price: number;
+  price: string;
 
   @Prop({ required: true })
   @Field()
@@ -32,7 +32,7 @@ export class CollectionItem {
 
   @Prop( { required: true })
   @Field()
-  CollectionID: string;
+  collectionID: string;
 
   @Prop()
   @Field()
@@ -48,6 +48,35 @@ export const CollectionItemSchema =
 
 @InputType()
 export class createCollectionItemInput {
+
+  @Field()
+  name: string;
+
+  @Field()
+  description: string;
+
+  @Field()
+  image: string;
+
+  @Field()
+  price: string;
+
+  @Field()
+  condition: string;
+
+  @Field()
+  collectionID: string;
+
+  @Field()
+  createdAt: Date;
+
+  @Field()
+  updatedAt: Date;
+}
+
+@InputType()
+export class updateCollectionItemInput {
+
   @Field()
   _id: string;
 
@@ -61,10 +90,13 @@ export class createCollectionItemInput {
   image: string;
 
   @Field()
-  price: number;
+  price: string;
 
   @Field()
   condition: string;
+
+  @Field()
+  collectionID: string;
 
   @Field()
   createdAt: Date;
@@ -72,3 +104,4 @@ export class createCollectionItemInput {
   @Field()
   updatedAt: Date;
 }
+

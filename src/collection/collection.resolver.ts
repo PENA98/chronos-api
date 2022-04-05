@@ -26,7 +26,7 @@ export class CollectionResolver {
 
   @Query(() => Collection)
   @UseGuards(JwtAuthGuard) // <-- protects the query
-  async collection(id: string) {
+  async collection(@Args('collectionID') id: string) {
     return this.collectionService.findById(id);
   }
 
