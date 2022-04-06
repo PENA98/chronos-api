@@ -34,7 +34,7 @@ jobs:
           # Filename for archive
           filename: release.zip
           # Base path for archive files
-          path: ./dist/*
+          path: .
          
 
       - name: Upload artifact for deployment job
