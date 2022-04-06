@@ -8,7 +8,11 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'public'),{
     prefix: '/public'
   });
-  app.enableCors();
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: false
+  });
   const port = process.env.PORT || 3000;
   await app.listen(port);
 }
