@@ -1,7 +1,8 @@
-import { Resolver, Query, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import {
   CollectionItem,
   createCollectionItemInput,
+  updateCollectionItemInput,
 } from './collectionItem.schema';
 import { CollectionItemService } from './collectionItem.service';
 import { UseGuards } from '@nestjs/common';
@@ -14,8 +15,8 @@ export class CollectionItemResolver {
 
   @Query(() => [CollectionItem]) // <-- what the query will return
   @UseGuards(JwtAuthGuard) // <-- protects the query
-  async collectionItems() {    // <-- query name
-    return this.collectionItemService.findAll(); // <-- resolve the query
+  async collectionItems(@Args('collectionID') collectionID: string) {    // <-- query name
+    return this.collectionItemService.findAll(collectionID); // <-- resolve the query
   }
 
   @Query(() => CollectionItem)
@@ -26,19 +27,19 @@ export class CollectionItemResolver {
 
   @Mutation(() => CollectionItem) // <-- what the mutation will receive
   @UseGuards(JwtAuthGuard) // <-- protects the query
-  async createCollectionItem(collectionItem: createCollectionItemInput) { // <-- mutation name
+  async createCollectionItem(@Args('createCollectionItemInput') collectionItem: createCollectionItemInput) { // <-- mutation name
     return this.collectionItemService.createCollectionItem(collectionItem); // <-- resolve the mutation
   }
 
   @Mutation(() => CollectionItem)
   @UseGuards(JwtAuthGuard) // <-- protects the query
-  async updateCollectionItem(collectionItem: createCollectionItemInput) {
+  async updateCollectionItem(@Args('collectionItem') collectionItem: updateCollectionItemInput) {
     return this.collectionItemService.updateCollectionItem(collectionItem);
   }
 
   @Mutation(() => CollectionItem)
   @UseGuards(JwtAuthGuard) // <-- protects the query
-  async deleteCollectionItem(id: string) {
+  async deleteCollectionItem(@Args('id') id: string) {
     return this.collectionItemService.deleteCollectionItem(id);
   }
 }

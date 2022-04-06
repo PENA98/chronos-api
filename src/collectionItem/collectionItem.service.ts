@@ -5,6 +5,7 @@ import {
   CollectionItem,
   CollectionItemDocument,
   createCollectionItemInput,
+  updateCollectionItemInput,
 } from './collectionItem.schema';
 
 @Injectable()
@@ -17,8 +18,8 @@ export class CollectionItemService {
     // this.collectionItems = collectionItems
   }
 
-  async findAll() {
-    return this.collectionItemModel.find().lean();
+  async findAll(collectionID: string) {
+    return this.collectionItemModel.find({ collectionID: collectionID }).lean();
   }
 
   async findById(id: string) {
@@ -30,7 +31,7 @@ export class CollectionItemService {
     return createdCollectionItem.save();
   }
 
-  async updateCollectionItem(collectionItem: createCollectionItemInput) {
+  async updateCollectionItem(collectionItem: updateCollectionItemInput) {
     return this.collectionItemModel.updateOne(
       { _id: collectionItem._id },
       collectionItem,

@@ -47,10 +47,10 @@ export class AuthService {
 
   async signup(signupUserInput: SignupUserInput) {
     const user = await this.userService.findOne(signupUserInput.username); // <-- check if user already exists
-
-    if (user) {
+    const userE = await this.userService.findOne(signupUserInput.email);
+    if (user || userE) {
       //<-- check if user exists
-      throw new Error('User already exists!');
+      throw new Error('User or Email already exists!');
     }
 
     if (signupUserInput.password !== signupUserInput.confirmPassword) {
